@@ -3,7 +3,7 @@
 var Account = function(name, balance) {
   this.name = name;
   this.balance = balance;
-  this.history = [balance];
+  this.history = [new Transaction(balance)];
 };
 
 Account.prototype.withdraw = function(amount) {
@@ -19,23 +19,21 @@ Account.prototype.deposit = function(amount) {
 var Transaction = function(amount) {
   this.amount = amount;
   var currentTime = new Date(Date.now()).toUTCString();
-  console.log(currentTime);
   this.time = currentTime;
 }
 
-var getTime = function() {
-  console.log(Date.now);
-return Date.now();
-}
-
 //UI logic
+
+var userAccount = new Account("Michael", 1000);
+
 $(document).ready(function(){
+
   $("form#registrationForm").submit(function(event){
     event.preventDefault();
     var nameInput = $("input#name").val();
     var initialDepositInput = parseInt($("input#initialDeposit").val());
     var userAccount = new Account(nameInput, initialDepositInput);
-    $("#historyList").append("<li>Initial Balance: " + userAccount.history[0] + "</li>");
+    $("#historyList").append("<li>Initial Balance: " + userAccount.history.Transaction + "</li>");
 
 
     $(".btn#transact").click(function(){
