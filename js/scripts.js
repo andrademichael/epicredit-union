@@ -24,7 +24,7 @@ $(document).ready(function(){
     var nameInput = $("input#name").val();
     var initialDepositInput = parseInt($("input#initialDeposit").val());
     var userAccount = new Account(nameInput, initialDepositInput);
-    console.log(userAccount);
+    $("#historyList").append("<li>Initial Balance: " + userAccount.history[0] + "</li>");
 
 
     $(".btn#transact").click(function(){
@@ -35,10 +35,12 @@ $(document).ready(function(){
 
       if (transactionTypeInput === "withdrawal") {
         userAccount.withdraw(amountInput);
+        $("#historyList").prepend("<li>" + userAccount.history[0] + "</li><li class='red'>  -" + amountInput + "</li>");
       } else {
         userAccount.deposit(amountInput);
+        $("#historyList").prepend("<li>" + userAccount.history[0] + "</li><li class='green'>  +" + amountInput + "</li>");
+
       }
-      console.log(userAccount);
 
     });//end of click function
 
